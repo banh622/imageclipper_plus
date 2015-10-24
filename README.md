@@ -34,7 +34,8 @@ You can also see how to use the program and all the options with:
 $ python imageclipper_plus.py --help
 ```
 
-Once the program is run from the command line, a window will open with the first image. 
+Once the program is run from the command line, a window will open with the first image. You will have to
+press tab initially for keyboard functionality. For some reason the initial tab is needed to select the canvas.
 The following commands and their usage are found both in the help function and summarized below:
 
 **Right Click:** Draw a box<br />

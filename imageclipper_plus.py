@@ -16,6 +16,9 @@ def main(argv):
                     'types. The boxes will be drawn in different colors.\n'
                     '\n'
                     'Basic Usage:\n'
+                    'When the app launches. Press tab to select the canvas object before there is keyboard\n'
+                    'functionality.\n'
+                    '\n'
                     'Right Click: Draw a box\n'
                     'Left Click: If inside a box, moves the box; if close to the border, re-sizes the box\n'
                     'Tab: Iterates through the object types.\n'
@@ -82,7 +85,7 @@ def main(argv):
         if not os.path.exists(output_directory + '/' + file):
             os.makedirs(output_directory + '/' + file)
 
-    app = ImageCrop(objects, object_list, colors, images, output_directory)
+    app = ImageCrop(objects, object_list, colors, images, output_directory, args.image_dir)
     app.mainloop()
 
 if __name__ == '__main__':

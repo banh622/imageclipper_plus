@@ -4,6 +4,7 @@ import math
 import cv2
 import PIL
 import csv
+import re
 from PIL import Image, ImageTk
 
 
@@ -13,7 +14,7 @@ class ImageCrop(tk.Tk):
     classes. It will save them in a directory that is provided in its cropped form as well as with a csv that
     has the coordinates of the boxes on the original image. It is initalized
     """
-    def __init__(self, objects, object_list, colors, images, output_dir):
+    def __init__(self, objects, object_list, colors, images, output_dir, image_dir):
         """
         The initialization of the ImageCrop object.
 
@@ -44,7 +45,8 @@ class ImageCrop(tk.Tk):
         self.canvas.bind("<Tab>", lambda event, args=(objects, colors): self.on_tab(event, args))
         self.canvas.bind("<Right>", lambda event, args=images: self.next_picture(event, args))
         self.canvas.bind("<Left>", lambda event, args=images: self.previous_picture(event, args))
-        self.canvas.bind("<space>", lambda event, args=(images, object_list, output_dir): self.save_all(event, args))
+        self.canvas.bind("<space>",
+                         lambda event, args=(images, object_list, output_dir, image_dir): self.save_all(event, args))
         self.canvas.bind("<BackSpace>", self.delete_all)
         self.canvas.bind("<ButtonPress-2>", self.create_rectangle)
         self.canvas.bind("<B2-Motion>", self.expand_rectangle)
@@ -189,7 +191,7 @@ class ImageCrop(tk.Tk):
         :param args: images, object_list, output_dir = the list of images, the list of objects, the output directory
         :return: Writes all the info to the directory provided
         """
-        images, object_list, output_dir = args
+        images, object_list, output_dir, image_dir = args
         image = images[self.image_index]
         # Open the full image
         full_image = Image.open(image)
@@ -206,7 +208,8 @@ class ImageCrop(tk.Tk):
                 x2 = int(math.ceil(float(x2) * 1/self.scale_ratio))
                 y2 = int(math.ceil(float(y2) * 1/self.scale_ratio))
                 cropped_test = full_image.crop((x1, y1, x2, y2))
-                cropped_test.save(object_out_dir + 'img' + str(self.image_index) + '-box-' + str(rect_num) + '.jpg')
+                cropped_test.save(object_out_dir + image.replace('.jpg', '').replace(image_dir, '') +
+                                  '-' + object + '-box-' + str(rect_num) + '.jpg')
                 self.write_coords(object_out_dir, image, x1, y1, x2, y2)
 
     def delete_all(self, event):
