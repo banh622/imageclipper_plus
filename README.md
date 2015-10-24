@@ -25,14 +25,14 @@ $ git clone <repo url>
 ### Usage
 
 To use the code, go to the directory that it is installed, then simply run:
-'''bash
+```bash
 $ python imageclipper_plus.py 'path/to/images/'
-'''
+```
 
 You can also see how to use the program and all the options with:
-'''bash
+```bash
 $ python imageclipper_plus.py --help
-'''
+```
 
 Once the program is run from the command line, a window will open with the first image. 
 The following commands and their usage are found both in the help function and summarized below:
