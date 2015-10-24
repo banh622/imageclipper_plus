@@ -37,10 +37,10 @@ $ python imageclipper_plus.py --help
 Once the program is run from the command line, a window will open with the first image. 
 The following commands and their usage are found both in the help function and summarized below:
 
-Right Click: Draw a box\n
-Left Click: If inside a box, moves the box; if close to the border, re-sizes the box.\n
-Tab: Iterates through the object types.\n
-Space: Saves all the drawn boxes for the image displayed.\n
-Right Arrow: Go to the next image in the directory.\n
-Left Arrow: Go to the previous image in the directory.\n
+Right Click: Draw a box<br />
+Left Click: If inside a box, moves the box; if close to the border, re-sizes the box.<br />
+Tab: Iterates through the object types.<br />
+Space: Saves all the drawn boxes for the image displayed.<br />
+Right Arrow: Go to the next image in the directory.<br />
+Left Arrow: Go to the previous image in the directory.<br />
 Delete: Removes all drawn boxes.
