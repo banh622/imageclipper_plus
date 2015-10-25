@@ -214,7 +214,7 @@ class ImageCrop(tk.Tk):
                 cropped_test = full_image.crop((x1, y1, x2, y2))
                 cropped_test.save(object_out_dir + image.replace('.jpg', '').replace(image_dir, '') +
                                   '-' + object + '-box-' + str(rect_num) + '.jpg')
-                self.write_coords(object_out_dir, image, x1, y1, x2, y2)
+                self.write_coords(object_out_dir, image, object, x1, y1, x2, y2)
 
     def delete_all(self, event):
         """
@@ -376,7 +376,7 @@ class ImageCrop(tk.Tk):
         self.canvas.itemconfig(self.text, text=self.object)
         self.rect_outline_color = color
 
-    def write_coords(self, file_path, image, x, y, width, height):
+    def write_coords(self, file_path, image, object, x, y, width, height):
         """
         Write the given parameters to a csv
         TODO: Check this out. I think opencv uses start x, start y, width, height, but currently I have
@@ -391,4 +391,4 @@ class ImageCrop(tk.Tk):
         """
         with open(file_path + 'positive_coords.csv', 'a') as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=',')
-            csv_writer.writerow([image, x, y, width, height])
+            csv_writer.writerow([image, object, x, y, width, height])
