@@ -42,6 +42,10 @@ The following commands and their usage are found both in the help function and s
 **Left Click:** If inside a box, moves the box; if close to the border, re-sizes the box.<br />
 **Tab:** Iterates through the object types.<br />
 **Space:** Saves all the drawn boxes for the image displayed.<br />
-**Right Arrow:** Go to the next image in the directory.<br />
-**Left Arrow:** Go to the previous image in the directory.<br />
+**./>:** Go to the next image in the directory.<br />
+**,/<:** Go to the previous image in the directory.<br />
+**Right Arrow:** Move all boxes right.<br />
+**Up Arrow:** Move all boxes up.<br />
+**Down Arrow:** Move all boxes down.<br />
+**Left Arrow:** Move all boxes left.<br />
 **Delete:** Removes all drawn boxes.
