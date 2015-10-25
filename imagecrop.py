@@ -43,11 +43,15 @@ class ImageCrop(tk.Tk):
 
         # Creating the functionality of the canvas.
         self.canvas.bind("<Tab>", lambda event, args=(objects, colors): self.on_tab(event, args))
-        self.canvas.bind("<Right>", lambda event, args=images: self.next_picture(event, args))
-        self.canvas.bind("<Left>", lambda event, args=images: self.previous_picture(event, args))
+        self.canvas.bind(".", lambda event, args=images: self.next_picture(event, args))
+        self.canvas.bind(",", lambda event, args=images: self.previous_picture(event, args))
         self.canvas.bind("<space>",
                          lambda event, args=(images, object_list, output_dir, image_dir): self.save_all(event, args))
         self.canvas.bind("<BackSpace>", self.delete_all)
+        self.canvas.bind("<Right>", self.move_all_right)
+        self.canvas.bind("<Left>", self.move_all_left)
+        self.canvas.bind("<Up>", self.move_all_up)
+        self.canvas.bind("<Down>", self.move_all_down)
         self.canvas.bind("<ButtonPress-2>", self.create_rectangle)
         self.canvas.bind("<B2-Motion>", self.expand_rectangle)
         self.canvas.bind("<ButtonPress-1>", self.on_rect_button_press)
@@ -222,6 +226,46 @@ class ImageCrop(tk.Tk):
         for rect in rectangle_objects:
             self.canvas.delete(rect)
 
+    def move_all_left(self, event):
+        """
+        Moves all the boxes drawn left
+        :param event: Left key pressed
+        :return: All boxes moved a pixel to the left
+        """
+        rectangle_objects = self.canvas.find_withtag('rectdrag')
+        for rect in rectangle_objects:
+            self.canvas.move(rect, -1, 0)
+
+    def move_all_right(self, event):
+        """
+        Moves all the boxes drawn right
+        :param event: Right key pressed
+        :return: All boxes moved a pixel to the right
+        """
+        rectangle_objects = self.canvas.find_withtag('rectdrag')
+        for rect in rectangle_objects:
+            self.canvas.move(rect, 1, 0)
+
+    def move_all_up(self, event):
+        """
+        Moves all the boxes drawn up
+        :param event: Up key pressed
+        :return: All boxes moved a pixel up
+        """
+        rectangle_objects = self.canvas.find_withtag('rectdrag')
+        for rect in rectangle_objects:
+            self.canvas.move(rect, 0, -1)
+
+    def move_all_down(self, event):
+        """
+        Moves all the boxes drawn down
+        :param event: Down key pressed
+        :return: All boxes moved a pixel down
+        """
+        rectangle_objects = self.canvas.find_withtag('rectdrag')
+        for rect in rectangle_objects:
+            self.canvas.move(rect, 0, 1)
+
     def on_rect_button_press(self, event):
         """
         Finds the box closest to the click. It can be a few pixels outside the border.
@@ -232,7 +276,7 @@ class ImageCrop(tk.Tk):
         rects = self.canvas.find_withtag('rectdrag')
         for rect in rects:
             x1, y1, x2, y2 = self.canvas.bbox(rect)
-            if x1 - 10 < event.x < x2 + 10 and y1 - 10 < event.y < y2 + 10:
+            if x1 - 3 < event.x < x2 + 3 and y1 - 3 < event.y < y2 + 3:
                 self._drag_data['item'] = rect
                 self._drag_data['x'] = event.x
                 self._drag_data['y'] = event.y
@@ -265,28 +309,28 @@ class ImageCrop(tk.Tk):
         """
         # This logic is used to determine if the box should be resized or moved. If the cursor is clicked
         # within 10 pixels of the line it will resize that line.
-        if self._drag_data["x1"] - 10 < event.x < self._drag_data["x1"] + 10:
+        if self._drag_data["x1"] - 3 < event.x < self._drag_data["x1"] + 3:
             self.canvas.coords(self._drag_data["item"],
                                event.x, self._drag_data["y1"],
                                self._drag_data["x2"], self._drag_data["y2"])
             self._drag_data["x1"] = event.x
             self._drag_data["x"] = event.x
             self._drag_data["y"] = event.y
-        elif self._drag_data["x2"] + 10 > event.x > self._drag_data["x2"] - 10:
+        elif self._drag_data["x2"] + 3 > event.x > self._drag_data["x2"] - 3:
             self.canvas.coords(self._drag_data["item"],
                                self._drag_data["x1"], self._drag_data["y1"],
                                event.x, self._drag_data["y2"])
             self._drag_data["x2"] = event.x
             self._drag_data["x"] = event.x
             self._drag_data["y"] = event.y
-        elif self._drag_data["y1"] - 10 < event.y < self._drag_data["y1"] + 10:
+        elif self._drag_data["y1"] - 3 < event.y < self._drag_data["y1"] + 3:
             self.canvas.coords(self._drag_data["item"],
                                self._drag_data["x1"], event.y,
                                self._drag_data["x2"], self._drag_data["y2"])
             self._drag_data["y1"] = event.y
             self._drag_data["x"] = event.x
             self._drag_data["y"] = event.y
-        elif self._drag_data["y2"] + 10 > event.y > self._drag_data["y2"] - 10:
+        elif self._drag_data["y2"] + 3 > event.y > self._drag_data["y2"] - 3:
             self.canvas.coords(self._drag_data["item"],
                                self._drag_data["x1"], self._drag_data["y1"],
                                self._drag_data["x2"], event.y)
