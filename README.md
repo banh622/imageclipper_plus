@@ -4,19 +4,20 @@ Image Clipper Plus
 This is a variation of the [imageclipper](https://code.google.com/p/imageclipper/)
 program initially written by Naotoshi Seo.
 
-I made this program so that I could draw many boxes on one image as well as boxes from
-different types. For example I want to draw a box for a persons face and eyes at the same
+I made this program so that I could draw many boxes on one image as well as boxes for
+different objects. For example I want to draw a box for a person's face and eyes at the same
 time.
 
 ## Building
 
-To build you need [OpenCV](http://opencv.org/) and [Python]
+To build you need [OpenCV](http://opencv.org/) and [Python](https://www.python.org/)
 on your system. I created using opencv 3.0, but it doesnt use anything new from previous versions.
+
 TODO: Remove the packages dependency on opencv
 
 ### Install
 
-And then build:
+Build the repo using the following command:
 
 ```bash
 $ git clone <repo url>
@@ -25,11 +26,13 @@ $ git clone <repo url>
 ### Usage
 
 To use the code, go to the directory that it is installed, then simply run:
+
 ```bash
 $ python imageclipper_plus.py 'path/to/images/'
 ```
 
 You can also see how to use the program and all the options with:
+
 ```bash
 $ python imageclipper_plus.py --help
 ```
