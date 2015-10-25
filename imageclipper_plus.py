@@ -23,9 +23,13 @@ def main(argv):
                     'Left Click: If inside a box, moves the box; if close to the border, re-sizes the box\n'
                     'Tab: Iterates through the object types.\n'
                     'Space: Saves all the drawn boxes for the image displayed.\n'
-                    'Right Arrow: Go to the next image in the directory.\n'
-                    'Left Arrow: Go to the previous image in the directory.\n'
-                    'Delete: Removes all drawn boxes',
+                    './>: Go to the next image in the directory.\n'
+                    ',/<: Go to the previous image in the directory.\n'
+                    'Right Arrow: Move all boxes right.\n'
+                    'Up Arrow: Move all boxes up.\n'
+                    'Down Arrow: Move all boxes down.\n'
+                    'Left Arrow: Move all boxes left.\n'
+                    'Delete: Removes all drawn boxes.',
         formatter_class=argparse.RawTextHelpFormatter)
 
     parser.add_argument(
